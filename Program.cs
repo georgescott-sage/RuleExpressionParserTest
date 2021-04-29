@@ -19,22 +19,4 @@ namespace RuleExpressionParserTest
             Console.WriteLine(message);
         }
     }
-
-    public class ExpressionParser
-    {
-        Regex regex = 
-            new Regex("^(?'Bucket'(Account|Business|Tenant))\\s(?'Constraint'(Must Have|Must Not Have))\\s(?'ContextKey'(Product|Module|Feature|FeatureAllowanceCounter))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$");
-
-        public bool IsValid(string expression)
-        {
-            Match match = regex.Match(expression);
-
-            if (match.Success)
-            {
-                Console.WriteLine(match.Groups["Bucket"].Value);
-            }
-            return false;
-        }
-
-    }
 }
