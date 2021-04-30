@@ -7,16 +7,13 @@ namespace RuleExpressionParserTest
 {
     public class ExpressionParser
     {
-        Regex regex = 
-            new Regex("^(?'Bucket'(Account|Business|Tenant))\\s(?'Constraint'(Must Have|Must Not Have))\\s(?'ContextKey'(Product|Module|Feature|FeatureAllowanceCounter))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$");
-
         public bool IsValid(string expression)
         {
-            var contraintOptions = GetStringOptions<Constraint>();
-            Console.WriteLine(contraintOptions);
-
             var bucketOptions = GetStringOptions<Bucket>();
-            Console.WriteLine(bucketOptions);
+            var contraintOptions = GetStringOptions<Constraint>();
+
+            string regexString = $"^(?'Bucket'({bucketOptions}))\\s(?'Constraint'({contraintOptions}))\\s(?'ContextKey'(Product|Module|Feature|FeatureAllowanceCounter))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
+            Regex regex = new Regex(regexString);
 
             Match match = regex.Match(expression);
 
