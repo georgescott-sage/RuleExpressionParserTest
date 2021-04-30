@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace RuleExpressionParserTest
@@ -32,7 +30,10 @@ namespace RuleExpressionParserTest
             // Console.WriteLine(match.Groups["ConditionValue"].Value);
 
             //Where to get tennantID?
+            //where to get product info?
+            //should expression also have an error code/message?
             //count before change or after?
+
 
             //SELECT Count FROM TenantFeatureAllowanceCounters WHERE FeatureAllowanceKey = Product_Users AND TenantID = ???
             //must not have
