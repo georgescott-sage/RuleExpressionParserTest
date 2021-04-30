@@ -9,7 +9,15 @@ namespace RuleExpressionParserTest
         {
             Console.WriteLine("Hello World!");
             string testExpression = "Tenant Must Have FeatureAllowanceCounter[Product_Users] <= 5";
+            string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
 
+            Parse(testExpression);
+            Console.WriteLine();
+            Parse(testExpression2);
+        }
+
+        private static void Parse(string testExpression)
+        {
             ExpressionParser parser = new ExpressionParser();
 
             var result = parser.IsValid(testExpression);
