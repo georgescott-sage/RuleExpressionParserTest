@@ -26,9 +26,9 @@ namespace RuleExpressionParserTest
 
             var queryDetail = new QueryDetail()
             {
-                Bucket = match.Groups["Bucket"].Value,
-                Constraint = match.Groups["Contraint"].Value,
-                ContextKey = match.Groups["ContextKey"].Value,
+                Bucket = ParseEnum<Bucket>(match.Groups["Bucket"].Value),
+                Constraint = ParseEnum<Constraint>(match.Groups["Contraint"].Value),
+                ContextKey = ParseEnum<ContextKey>(match.Groups["ContextKey"].Value),
                 ContextValue = match.Groups["ContextValue"].Value,
                 ContextOperator = match.Groups["ConditionOperator"].Value,
                 ConditionValue = match.Groups["ConditionValue"].Value
@@ -53,6 +53,12 @@ namespace RuleExpressionParserTest
         {
             var options = System.Enum.GetNames(typeof(T));
             return String.Join('|', options);
+        }
+
+        public static T ParseEnum<T>(string enumString) where T : struct
+        {
+            Enum.TryParse(enumString, out T enumResult);
+            return enumResult;
         }
 
     }
