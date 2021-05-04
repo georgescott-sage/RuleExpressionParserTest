@@ -20,9 +20,6 @@ namespace RuleExpressionParserTest
             {
                 return false;
             }
-            // Console.WriteLine($"parsed string: {match.Groups["Bucket"].Value}");
-            // Enum.TryParse(match.Groups["Bucket"].Value, out Bucket bucketEnum);
-            // Console.WriteLine($"parsed enum: {bucketEnum.ToString()}");
 
             var queryDetail = new QueryDetail()
             {
