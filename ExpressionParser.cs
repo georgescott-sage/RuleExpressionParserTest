@@ -9,8 +9,9 @@ namespace RuleExpressionParserTest
         {
             var bucketOptions = GetStringOptions<Bucket>();
             var contraintOptions = GetStringOptions<Constraint>();
+            var contextKeyOptions = GetStringOptions<ContextKey>();
 
-            string regexString = $"^(?'Bucket'({bucketOptions}))\\s(?'Constraint'({contraintOptions}))\\s(?'ContextKey'(Product|Module|Feature|FeatureAllowanceCounter))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
+            string regexString = $"^(?'Bucket'({bucketOptions}))\\s(?'Constraint'({contraintOptions}))\\s(?'ContextKey'({contextKeyOptions}))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
             Regex regex = new Regex(regexString);
 
             Match match = regex.Match(expression);
