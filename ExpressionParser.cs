@@ -38,11 +38,6 @@ namespace RuleExpressionParserTest
             //should expression also have an error code/message?
             //count before change or after?
 
-
-            //SELECT Count FROM TenantFeatureAllowanceCounters WHERE FeatureAllowanceKey = Product_Users AND TenantID = ???
-            //must not have
-            //if Count <= 5
-
             return true;
         }
 

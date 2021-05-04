@@ -12,6 +12,7 @@ namespace RuleExpressionParserTest
             //string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
 
             string testExpression = "Tenant MustHave FeatureAllowanceCounter[Product_Users] <= 5";
+
             string testExpression2 = "Business MustNotHave Product[Accounting] > 0";
 
             Parse(testExpression);
