@@ -20,16 +20,22 @@ namespace RuleExpressionParserTest
             {
                 return false;
             }
-            Console.WriteLine($"parsed string: {match.Groups["Bucket"].Value}");
-            Enum.TryParse(match.Groups["Bucket"].Value, out Bucket bucketEnum);
-            Console.WriteLine($"parsed enum: {bucketEnum.ToString()}");
+            // Console.WriteLine($"parsed string: {match.Groups["Bucket"].Value}");
+            // Enum.TryParse(match.Groups["Bucket"].Value, out Bucket bucketEnum);
+            // Console.WriteLine($"parsed enum: {bucketEnum.ToString()}");
 
-            // Console.WriteLine(match.Groups["Constraint"].Value);
-            // Console.WriteLine(match.Groups["ContextKey"].Value);
-            // Console.WriteLine(match.Groups["ContextValue"].Value);
-            // Console.WriteLine(match.Groups["ConditionOperator"].Value);
-            // Console.WriteLine(match.Groups["ConditionValue"].Value);
+            var queryDetail = new QueryDetail()
+            {
+                Bucket = match.Groups["Bucket"].Value,
+                Constraint = match.Groups["Contraint"].Value,
+                ContextKey = match.Groups["ContextKey"].Value,
+                ContextValue = match.Groups["ContextValue"].Value,
+                ContextOperator = match.Groups["ConditionOperator"].Value,
+                ConditionValue = match.Groups["ConditionValue"].Value
 
+            };
+
+            Console.WriteLine(queryDetail.Bucket);
             //Where to get tennantID?
             //where to get product info?
             //should expression also have an error code/message?
