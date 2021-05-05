@@ -7,13 +7,13 @@ namespace RuleExpressionParserTest
     {
         public bool IsValid(string expression)
         {
-            var bucketOptions = GetStringOptions<Bucket>();
-            var contraintOptions = GetStringOptions<Constraint>();
-            var contextKeyOptions = GetStringOptions<ContextKey>();
+            var bucketOptions = BuildMatchGroup<Bucket>();
+            var contraintOptions = BuildMatchGroup<Constraint>();
+            var contextKeyOptions = BuildMatchGroup<ContextKey>();
 
-            string regexString = $"^(?'Bucket'({bucketOptions}))\\s(?'Constraint'({contraintOptions}))\\s(?'ContextKey'({contextKeyOptions}))\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
+            string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
             Regex regex = new Regex(regexString);
-
+            Console.WriteLine(regexString);
             Match match = regex.Match(expression);
 
             if (!match.Success)
@@ -29,10 +29,10 @@ namespace RuleExpressionParserTest
                 ContextValue = match.Groups["ContextValue"].Value,
                 ContextOperator = match.Groups["ConditionOperator"].Value,
                 ConditionValue = match.Groups["ConditionValue"].Value
-
             };
 
             Console.WriteLine(queryDetail.Bucket);
+
             //Where to get tennantID?
             //where to get product info?
             //should expression also have an error code/message?
@@ -41,10 +41,11 @@ namespace RuleExpressionParserTest
             return true;
         }
 
-        public static string GetStringOptions<T>() where T : struct
+        public static string BuildMatchGroup<T>() where T : struct
         {
+            var typeName = typeof(T).Name;
             var options = System.Enum.GetNames(typeof(T));
-            return String.Join('|', options);
+            return $"?'{typeName}'({String.Join('|', options)})";
         }
 
         public static T ParseEnum<T>(string enumString) where T : struct
