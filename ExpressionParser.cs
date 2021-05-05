@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace RuleExpressionParserTest
@@ -10,6 +12,16 @@ namespace RuleExpressionParserTest
             var bucketOptions = BuildMatchGroup<Bucket>();
             var contraintOptions = BuildMatchGroup<Constraint>();
             var contextKeyOptions = BuildMatchGroup<ContextKey>();
+            var conditionOptions = GetEnumValues<ConditionOperator>();
+            Console.WriteLine(conditionOptions);
+
+            foreach (int value in Enum.GetValues(typeof(ConditionOperator)))
+            {
+                Console.WriteLine(((ConditionOperator)value).ToString());
+            }
+
+
+
 
             string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s(?'ConditionOperator'(=|>|>=|<|<=))\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
             Regex regex = new Regex(regexString);
@@ -41,7 +53,13 @@ namespace RuleExpressionParserTest
             return true;
         }
 
-        public static string BuildMatchGroup<T>() where T : struct
+        private static string GetEnumValues<T>() where T : Enum
+        {
+            var values = Enum.GetValues(typeof(T)).Cast<T>();
+            return string.Join('|', values);
+        }
+
+        public static string BuildMatchGroup<T>() where T : Enum
         {
             var typeName = typeof(T).Name;
             var options = System.Enum.GetNames(typeof(T));
@@ -53,6 +71,5 @@ namespace RuleExpressionParserTest
             Enum.TryParse(enumString, out T enumResult);
             return enumResult;
         }
-
     }
 }
