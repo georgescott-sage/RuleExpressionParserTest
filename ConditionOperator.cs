@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 
 namespace RuleExpressionParserTest
 {
-    public class ConditionOperator
+
+    public class ConditionOperator : AbstractExpressionGroup
     {
-        private readonly string value;
         public static readonly Dictionary<string, ConditionOperator> PredefinedValues;
         public static readonly ConditionOperator Equal = new ConditionOperator("=");
         public static readonly ConditionOperator GreaterThan = new ConditionOperator(">");
@@ -25,28 +22,13 @@ namespace RuleExpressionParserTest
             PredefinedValues.Add(LessThanEqual.Value, LessThanEqual);
         }
 
-        private ConditionOperator(string value)
+        public ConditionOperator(string value) : base(value)
         {
-            this.value = value;
         }
 
         public static ConditionOperator ParseValue(string value)
         {
-            var exception = new InvalidDataContractException($"Invalid value for type {nameof(ConditionOperator)}");
-            if (string.IsNullOrEmpty(value))
-                throw exception;
-
-            string key = value.ToLower();
-            if (!PredefinedValues.ContainsKey(key))
-                throw exception;
-
-            return PredefinedValues[key];
-        }
-
-        public string Value
-        {
-            get { return value; }
+            return ParseExpressionGroup<ConditionOperator>(value, PredefinedValues);
         }
     }
-
 }

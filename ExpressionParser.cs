@@ -12,7 +12,7 @@ namespace RuleExpressionParserTest
             var bucketOptions = BuildMatchGroup<Bucket>();
             var contraintOptions = BuildMatchGroup<Constraint>();
             var contextKeyOptions = BuildMatchGroup<ContextKey>();
-            var conditionOptions = GetMatchGroup(ConditionOperator.PredefinedValues);
+            var conditionOptions = GetMatchGroup<ConditionOperator>(ConditionOperator.PredefinedValues);
             Console.WriteLine(conditionOptions);
 
             string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s({conditionOptions})\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
@@ -45,7 +45,7 @@ namespace RuleExpressionParserTest
             return true;
         }
 
-        public static string GetMatchGroup(Dictionary<string, ConditionOperator> predefinedValues)
+        public static string GetMatchGroup<T>(Dictionary<string, T> predefinedValues) where T : AbstractExpressionGroup
         {
             var options = String.Join("|", predefinedValues.Select(KVP => KVP.Value.Value )); 
             return $"?'ConditionOperator'({options})";
