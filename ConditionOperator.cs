@@ -8,8 +8,7 @@ namespace RuleExpressionParserTest
     public class ConditionOperator
     {
         private readonly string value;
-        private static readonly Dictionary<string, ConditionOperator> predefinedValues;
-
+        public static readonly Dictionary<string, ConditionOperator> PredefinedValues;
         public static readonly ConditionOperator Equal = new ConditionOperator("=");
         public static readonly ConditionOperator GreaterThan = new ConditionOperator(">");
         public static readonly ConditionOperator GreaterThanEqual = new ConditionOperator(">=");
@@ -18,23 +17,17 @@ namespace RuleExpressionParserTest
 
         static ConditionOperator()
         {
-            predefinedValues = new Dictionary<string, ConditionOperator>();
-            predefinedValues.Add(Equal.Value, Equal);
-            predefinedValues.Add(GreaterThan.Value, GreaterThan);
-            predefinedValues.Add(GreaterThanEqual.Value, GreaterThanEqual);
-            predefinedValues.Add(LessThan.Value, LessThan);
-            predefinedValues.Add(LessThanEqual.Value, LessThanEqual);
+            PredefinedValues = new Dictionary<string, ConditionOperator>();
+            PredefinedValues.Add(Equal.Value, Equal);
+            PredefinedValues.Add(GreaterThan.Value, GreaterThan);
+            PredefinedValues.Add(GreaterThanEqual.Value, GreaterThanEqual);
+            PredefinedValues.Add(LessThan.Value, LessThan);
+            PredefinedValues.Add(LessThanEqual.Value, LessThanEqual);
         }
 
         private ConditionOperator(string value)
         {
             this.value = value;
-        }
-
-        public static string GetMatchGroup()
-        {
-            var options = String.Join("|", predefinedValues.Select(KVP => KVP.Value.Value )); 
-            return $"?'ConditionOperator'({options})";
         }
 
         public static ConditionOperator ParseValue(string value)
@@ -44,10 +37,10 @@ namespace RuleExpressionParserTest
                 throw exception;
 
             string key = value.ToLower();
-            if (!predefinedValues.ContainsKey(key))
+            if (!PredefinedValues.ContainsKey(key))
                 throw exception;
 
-            return predefinedValues[key];
+            return PredefinedValues[key];
         }
 
         public string Value

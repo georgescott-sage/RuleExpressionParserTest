@@ -12,7 +12,7 @@ namespace RuleExpressionParserTest
             var bucketOptions = BuildMatchGroup<Bucket>();
             var contraintOptions = BuildMatchGroup<Constraint>();
             var contextKeyOptions = BuildMatchGroup<ContextKey>();
-            var conditionOptions = ConditionOperator.GetMatchGroup();
+            var conditionOptions = GetMatchGroup(ConditionOperator.PredefinedValues);
             Console.WriteLine(conditionOptions);
 
             string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s({conditionOptions})\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
@@ -43,6 +43,12 @@ namespace RuleExpressionParserTest
             //count before change or after?
 
             return true;
+        }
+
+        public static string GetMatchGroup(Dictionary<string, ConditionOperator> predefinedValues)
+        {
+            var options = String.Join("|", predefinedValues.Select(KVP => KVP.Value.Value )); 
+            return $"?'ConditionOperator'({options})";
         }
 
         private static string GetEnumValues<T>() where T : Enum
