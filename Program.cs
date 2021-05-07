@@ -8,12 +8,9 @@ namespace RuleExpressionParserTest
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            //string testExpression = "Tenant Must Have FeatureAllowanceCounter[Product_Users] <= 5";
-            //string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
 
-            string testExpression = "Tenant MustHave FeatureAllowanceCounter[Product_Users] <= 5";
-
-            string testExpression2 = "Business MustNotHave Product[Accounting] > 0";
+            string testExpression = "Tenant Must Have FeatureAllowanceCounter[Product_Users] <= 5";
+            string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
 
             Parse(testExpression);
             Console.WriteLine();

@@ -10,10 +10,9 @@ namespace RuleExpressionParserTest
         public bool IsValid(string expression)
         {
             var bucketOptions = BuildMatchGroup<Bucket>();
-            var contraintOptions = BuildMatchGroup<Constraint>();
+            var contraintOptions = GetMatchGroup<Constraint>(Constraint.PredefinedValues);
             var contextKeyOptions = BuildMatchGroup<ContextKey>();
             var conditionOptions = GetMatchGroup<ConditionOperator>(ConditionOperator.PredefinedValues);
-            Console.WriteLine(conditionOptions);
 
             string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s({conditionOptions})\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
             Regex regex = new Regex(regexString);
@@ -28,14 +27,12 @@ namespace RuleExpressionParserTest
             var queryDetail = new QueryDetail()
             {
                 Bucket = ParseEnum<Bucket>(match.Groups["Bucket"].Value),
-                Constraint = ParseEnum<Constraint>(match.Groups["Contraint"].Value),
+                Constraint = Constraint.ParseValue(match.Groups["Constraint"].Value),
                 ContextKey = ParseEnum<ContextKey>(match.Groups["ContextKey"].Value),
                 ContextValue = match.Groups["ContextValue"].Value,
                 ConditionOperator = ConditionOperator.ParseValue(match.Groups["ConditionOperator"].Value),
                 ConditionValue = match.Groups["ConditionValue"].Value
             };
-
-            Console.WriteLine(queryDetail.ConditionOperator.Value);
 
             //Where to get tennantID?
             //where to get product info?
@@ -48,7 +45,7 @@ namespace RuleExpressionParserTest
         public static string GetMatchGroup<T>(Dictionary<string, T> predefinedValues) where T : AbstractExpressionGroup
         {
             var options = String.Join("|", predefinedValues.Select(KVP => KVP.Value.Value )); 
-            return $"?'ConditionOperator'({options})";
+            return $"?'{typeof(T).Name}'({options})";
         }
 
         private static string GetEnumValues<T>() where T : Enum

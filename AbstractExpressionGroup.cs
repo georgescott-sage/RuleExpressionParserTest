@@ -19,15 +19,14 @@ namespace RuleExpressionParserTest
 
         protected static T ParseExpressionGroup<T>(string value, Dictionary<string, T> PredefinedValues)
         {
-            var exception = new InvalidDataContractException($"Invalid value for type {nameof(AbstractExpressionGroup)}");
+            var exception = new InvalidDataContractException($"Invalid value for type {typeof(T).Name}");
             if (string.IsNullOrEmpty(value))
                 throw exception;
 
-            string key = value.ToLower();
-            if (!PredefinedValues.ContainsKey(key))
+            if (!PredefinedValues.ContainsKey(value))
                 throw exception;
 
-            return PredefinedValues[key];
+            return PredefinedValues[value];
         }
 
     }
