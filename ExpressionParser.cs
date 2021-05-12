@@ -52,24 +52,5 @@ namespace RuleExpressionParserTest
             var options = String.Join("|", predefinedValues.Select(KVP => KVP.Value.Value )); 
             return $"?'{typeof(T).Name}'({options})";
         }
-
-        private static string GetEnumValues<T>() where T : Enum
-        {
-            var values = Enum.GetValues(typeof(T)).Cast<T>();
-            return string.Join('|', values);
-        }
-
-        public static string BuildMatchGroup<T>() where T : Enum
-        {
-            var typeName = typeof(T).Name;
-            var options = System.Enum.GetNames(typeof(T));
-            return $"?'{typeName}'({String.Join('|', options)})";
-        }
-
-        public static T ParseEnum<T>(string enumString) where T : struct
-        {
-            Enum.TryParse(enumString, out T enumResult);
-            return enumResult;
-        }
     }
 }
