@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace RuleExpressionParserTest
+namespace RuleExpressionParserTest.ExpressionGroup
 {
     public class AbstractExpressionGroup
     {

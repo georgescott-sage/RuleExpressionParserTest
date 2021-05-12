@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RuleExpressionParserTest
+namespace RuleExpressionParserTest.ExpressionGroup
 {
     public class Constraint : AbstractExpressionGroup
     {

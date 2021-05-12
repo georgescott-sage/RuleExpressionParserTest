@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RuleExpressionParserTest
+namespace RuleExpressionParserTest.ExpressionGroup
 {
     public class Bucket : AbstractExpressionGroup
     {

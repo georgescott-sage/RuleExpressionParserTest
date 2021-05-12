@@ -1,3 +1,5 @@
+using RuleExpressionParserTest.ExpressionGroup;
+
 namespace RuleExpressionParserTest
 {
     internal class QueryDetail
