@@ -9,7 +9,7 @@ namespace RuleExpressionParserTest
     {
         public bool IsValid(string expression)
         {
-            var bucketOptions = BuildMatchGroup<Bucket>();
+            var bucketOptions = GetMatchGroup<Bucket>(Bucket.PredefinedValues);
             var contraintOptions = GetMatchGroup<Constraint>(Constraint.PredefinedValues);
             var contextKeyOptions = BuildMatchGroup<ContextKey>();
             var conditionOptions = GetMatchGroup<ConditionOperator>(ConditionOperator.PredefinedValues);
@@ -26,7 +26,7 @@ namespace RuleExpressionParserTest
 
             var queryDetail = new QueryDetail()
             {
-                Bucket = ParseEnum<Bucket>(match.Groups["Bucket"].Value),
+                Bucket = Bucket.ParseValue(match.Groups["Bucket"].Value),
                 Constraint = Constraint.ParseValue(match.Groups["Constraint"].Value),
                 ContextKey = ParseEnum<ContextKey>(match.Groups["ContextKey"].Value),
                 ContextValue = match.Groups["ContextValue"].Value,
