@@ -10,10 +10,13 @@ namespace RuleExpressionParserTest
             Console.WriteLine("Hello World!");
 
             string testExpression = "Tenant Must Have FeatureAllowanceCounter[Product_Users] <= 5";
-            string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
-
+            Console.WriteLine(testExpression);
             Parse(testExpression);
+
             Console.WriteLine();
+
+            string testExpression2 = "Business Must Not Have Product[Accounting] > 0";
+            Console.WriteLine(testExpression2);
             Parse(testExpression2);
         }
 
@@ -23,7 +26,7 @@ namespace RuleExpressionParserTest
 
             var result = parser.IsValid(testExpression);
 
-            var message = result ? "Allowed" : "Not allowed";
+            var message = result ? "Parsed :)" : "No Parsed :(";
 
             Console.WriteLine(message);
         }
