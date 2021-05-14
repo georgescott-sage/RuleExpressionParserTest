@@ -1,4 +1,4 @@
-using RuleExpressionParserTest.ExpressionGroup;
+using RuleExpressionParserTest.ExpressionGroups;
 
 namespace RuleExpressionParserTest
 {

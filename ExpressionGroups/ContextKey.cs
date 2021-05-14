@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RuleExpressionParserTest.ExpressionGroup
+namespace RuleExpressionParserTest.ExpressionGroups
 {
     public class ContextKey : AbstractExpressionGroup
     {
