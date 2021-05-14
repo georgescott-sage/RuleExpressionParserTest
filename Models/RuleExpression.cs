@@ -1,6 +1,6 @@
 using RuleExpressionParserTest.ExpressionGroups;
 
-namespace RuleExpressionParserTest
+namespace RuleExpressionParserTest.Models
 {
     internal class RuleExpression
     {
