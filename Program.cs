@@ -22,7 +22,7 @@ namespace RuleExpressionParserTest
 
         private static void Parse(string testExpression)
         {
-            ExpressionParser parser = new ExpressionParser();
+            RuleExpressionParser parser = new RuleExpressionParser();
 
             var result = parser.IsValid(testExpression);
 

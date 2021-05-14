@@ -6,7 +6,7 @@ using RuleExpressionParserTest.ExpressionGroup;
 
 namespace RuleExpressionParserTest
 {
-    public class ExpressionParser
+    public class RuleExpressionParser
     {
         public bool IsValid(string expression)
         {
@@ -24,7 +24,7 @@ namespace RuleExpressionParserTest
                 return false;
             }
 
-            var queryDetail = new QueryDetail()
+            var queryDetail = new RuleExpression()
             {
                 Bucket = Bucket.ParseValue(match.Groups["Bucket"].Value),
                 Constraint = Constraint.ParseValue(match.Groups["Constraint"].Value),

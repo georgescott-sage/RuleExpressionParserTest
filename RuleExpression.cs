@@ -2,7 +2,7 @@ using RuleExpressionParserTest.ExpressionGroup;
 
 namespace RuleExpressionParserTest
 {
-    internal class QueryDetail
+    internal class RuleExpression
     {
         public Bucket Bucket { get; set; }
         public Constraint Constraint { get; set; }
