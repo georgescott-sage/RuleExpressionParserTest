@@ -9,7 +9,9 @@ namespace RuleExpressionParserTest
 {
     public class RuleExpressionParser
     {
-        public bool IsValid(string expression)
+        public Regex regex { get; }
+
+        public RuleExpressionParser()
         {
             var bucketOptions = GetMatchGroup<Bucket>(Bucket.PredefinedValues);
             var contraintOptions = GetMatchGroup<Constraint>(Constraint.PredefinedValues);
@@ -17,7 +19,11 @@ namespace RuleExpressionParserTest
             var conditionOptions = GetMatchGroup<ConditionOperator>(ConditionOperator.PredefinedValues);
 
             string regexString = $"^({bucketOptions})\\s({contraintOptions})\\s({contextKeyOptions})\\[(?'ContextValue'.*)\\]\\s({conditionOptions})\\s(?'ConditionValue'([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]))$";
-            Regex regex = new Regex(regexString);
+            regex = new Regex(regexString);
+        }
+
+        public bool IsValid(string expression)
+        {
             Match match = regex.Match(expression);
 
             if (!match.Success)
@@ -41,10 +47,6 @@ namespace RuleExpressionParserTest
             Console.WriteLine($"ContextValue: {queryDetail.ContextValue}");
             Console.WriteLine($"ConditionOperator: {queryDetail.ConditionOperator.Value}");
             Console.WriteLine($"ConditionValue: {queryDetail.ConditionValue}");
-            //Where to get tennantID?
-            //where to get product info?
-            //should expression also have an error code/message?
-            //count before change or after?
 
             return true;
         }
